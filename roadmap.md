@@ -1,37 +1,32 @@
 # Roadmap - Twitter Clone Project
 
-## 1. Configuration initiale
+## 1. Configuration initiale ✅
 - [x] Initialiser Strapi backend
   - Utiliser SQLite en développement
   - Vérifier l'accès à l'admin panel
 - [x] Configurer l'environnement de développement
 - [x] Créer le projet React frontend avec Vite
-  ```bash
-  pnpm create vite frontend --template react
-  ```
 - [x] Installer les dépendances essentielles
-  - react-router-dom (routing)
-  - jotai (state management)
-  - axios (API calls)
-  - styled-components (styling)
+  - react-router-dom
+  - jotai
+  - axios
+  - styled-components
 
 ## 2. Backend (Strapi) Setup
-- [x] Configurer les collections avec le Content-Type Builder:
+- [x] Configurer les collections de base:
   - Tweet: 
     ```
     content: text
     timestamp: datetime
-    author: relation with User
     ```
-  - Comment, Like, Follow (relations)
 - [x] Configurer JWT et Permissions
-  - Activer JWT authentication
-  - Définir les rôles (Public/Authenticated)
-  - Configurer les permissions par collection
-- [ ] Tester les endpoints API avec Postman/Insomnia
-  - CRUD Tweets
-  - Auth endpoints
-  - Relations endpoints
+  - [x] Activer JWT authentication
+  - [x] Définir les rôles (Public/Authenticated)
+  - [x] Configurer les permissions par collection
+- [x] Tester les endpoints API de base
+  - [x] POST /tweets (création)
+  - [x] GET /tweets (liste)
+  - [ ] Relations et endpoints avancés (à faire plus tard)
 
 ## 3. Frontend Architecture
 - [x] Structure des dossiers
@@ -44,123 +39,79 @@
     store/
     utils/
   ```
+- [x] Configuration des services API
+  - [x] Setup Axios
+  - [x] Service tweets.ts
 - [ ] React Router Setup
   ```jsx
   routes = [
     { path: '/', element: <Home /> },
-    { path: '/login', element: <Login /> },
-    { path: '/profile/:id', element: <Profile /> }
+    { path: '/login', element: <Login /> }
   ]
   ```
 - [ ] Jotai Store Setup
   ```jsx
-  // Atoms de base
   authAtom
-  userAtom
   tweetsAtom
   ```
-- [ ] Service API Setup
-  - Axios instance configuration
-  - Intercepteurs pour JWT
-  - Handlers d'erreur
 
-## 4. Authentication
-- [ ] JWT Implementation
-  - Login/Register forms
-  - Token storage (localStorage)
-  - Refresh token logic
+## 4. Features Core (MVP)
+### 4.1 Tweets
+- [ ] Affichage des tweets
+  - Liste des tweets
+  - Composant Tweet individuel
+- [ ] Création de tweets
+  - Formulaire de création
+  - Validation
+  - Feedback utilisateur
+
+### 4.2 Authentication
+- [ ] Login/Register
+  - Formulaires
+  - Gestion du token JWT
+  - Redirection
 - [ ] Protected Routes
-  - Auth middleware
-  - Redirect logic
-- [ ] User Session
-  - Persistence
-  - Auto login
-  - Token refresh
+  - HOC ou composant wrapper
+  - Redirection si non authentifié
 
-## 5. Features Core (avec Jotai + API)
-### 5.1 Tweets
-- [ ] Tweet Creation
-  - Form component
-  - API integration
-  - Optimistic updates
-- [ ] Tweet Display
-  - Timeline component
-  - Infinite scroll
-  - Real-time updates
-
-### 5.2 Social Interactions
-- [ ] Follow System
-  - Follow/Unfollow API
-  - Followers/Following lists
-- [ ] Like System
-  - Like/Unlike API
-  - Counter updates
+## 5. Features Additionnelles (Phase 2)
+### 5.1 Relations et Interactions
+- [ ] Système Author
+  - Relation User-Tweet
+  - Affichage de l'auteur
+- [ ] Likes
+  - Relation many-to-many
+  - Toggle like/unlike
 - [ ] Comments
+  - CRUD commentaires
   - Nested comments
-  - Real-time updates
 
-## 6. State Management Avancé
-- [ ] Jotai Patterns
-  - Computed atoms pour le feed
-  - Async atoms pour l'API
-  - localStorage persistence
-- [ ] Cache Strategy
-  - Tweet cache
-  - User cache
-  - Invalidation strategy
-
-## 7. UI/UX Enhancement
-- [ ] Components Réutilisables
-  - Button, Input, Card
-  - Loading states
-  - Error boundaries
+## 6. UI/UX
+- [ ] Styled Components Setup
+  - Thème global
+  - Composants de base
 - [ ] Responsive Design
   - Mobile-first
   - Breakpoints
-  - Layout components
+- [ ] Loading States
+  - Skeletons
+  - Spinners
 
-## 8. Optimisation & Sécurité
+## 7. Optimisations
 - [ ] Performance
-  - Lazy loading routes
-  - Image optimization
-  - Memoization
-- [ ] Sécurité
-  - XSS protection
-  - CORS configuration
-  - Input validation
-
-## 9. Testing & Deployment
+  - Pagination/Infinite scroll
+  - Caching avec Jotai
+- [ ] Error Handling
+  - Error boundaries
+  - Toast notifications
 - [ ] Tests
-  - Unit tests (components)
-  - Integration tests (features)
-  - API tests
-- [ ] Deployment
-  - Build optimization
-  - ENV configuration
-  - Deploy frontend/backend
+  - Unit tests
+  - Integration tests
 
-## Ressources par Feature
-### Authentication
-- JWT.io pour debug tokens
-- Strapi Auth documentation
-- React Router Auth examples
-
-### State Management
-- Jotai documentation et patterns
-- Atoms patterns examples
-- localStorage persistence
-
-### API Integration
-- Strapi REST API docs
-- Axios interceptors setup
-- Error handling patterns
-
-### UI/UX
-- Styled-components patterns
-- Responsive design guides
-- Animation examples
-
-Suivez cette roadmap étape par étape, en vous assurant de bien comprendre et tester chaque feature avant de passer à la suivante.
+## Notes
+- Approche MVP first : d'abord les fonctionnalités de base
+- Relations complexes (author, likes) reportées à la phase 2
+- Focus sur la stabilité des features implémentées
 
 ## Stack Technique
 - Frontend:

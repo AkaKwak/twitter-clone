@@ -65,12 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "tweets": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::tweet.tweet",
-      "mappedBy": "users_permissions_user"
-    },
     "liked_tweets": {
       "type": "relation",
       "relation": "manyToMany",
@@ -88,6 +82,12 @@
       "relation": "oneToMany",
       "target": "api::follow.follow",
       "mappedBy": "following"
+    },
+    "tweets": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::tweet.tweet",
+      "mappedBy": "author"
     }
   }
 }
