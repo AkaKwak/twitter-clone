@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tweets",
+  "info": {
+    "singularName": "tweet",
+    "pluralName": "tweets",
+    "displayName": "Tweet",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "content": {
+      "type": "text",
+      "required": true
+    },
+    "timestamp": {
+      "type": "datetime",
+      "required": true
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "tweets"
+    },
+    "likes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "liked_tweets"
+    }
+  }
+}

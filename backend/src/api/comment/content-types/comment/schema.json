@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "Comment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "content": {
+      "type": "text",
+      "required": true,
+      "maxLength": 235
+    },
+    "timestamp": {
+      "type": "datetime",
+      "required": true
+    },
+    "author": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "comments"
+    },
+    "tweet": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tweet.tweet"
+    }
+  }
+}

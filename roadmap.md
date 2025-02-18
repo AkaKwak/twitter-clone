@@ -16,7 +16,7 @@
   - styled-components (styling)
 
 ## 2. Backend (Strapi) Setup
-- [ ] Configurer les collections avec le Content-Type Builder:
+- [x] Configurer les collections avec le Content-Type Builder:
   - Tweet: 
     ```
     content: text
@@ -24,7 +24,7 @@
     author: relation with User
     ```
   - Comment, Like, Follow (relations)
-- [ ] Configurer JWT et Permissions
+- [x] Configurer JWT et Permissions
   - Activer JWT authentication
   - Définir les rôles (Public/Authenticated)
   - Configurer les permissions par collection
