@@ -1,5 +1,12 @@
+/**
+ * Service de gestion des tweets
+ * Contient toutes les interactions avec l'API concernant les tweets
+ */
 import api from './api';
 
+/**
+ * Interface décrivant la structure d'un tweet
+ */
 export interface Tweet {
   id: number;
   content: string;
@@ -9,13 +16,20 @@ export interface Tweet {
 }
 
 export const tweetService = {
-  // Récupérer tous les tweets
+  /**
+   * Récupère tous les tweets depuis l'API
+   * @returns Promise contenant la liste des tweets
+   */
   getAll: async () => {
     const response = await api.get('/tweets');
     return response.data;
   },
 
-  // Créer un nouveau tweet
+  /**
+   * Crée un nouveau tweet
+   * @param content - Contenu du tweet
+   * @returns Promise contenant le tweet créé
+   */
   create: async (content: string) => {
     const response = await api.post('/tweets', {
       data: {
