@@ -42,7 +42,7 @@
 - [x] Configuration des services API
   - [x] Setup Axios
   - [x] Service tweets.ts
-- [ ] React Router Setup
+- [x] React Router Setup
   ```jsx
   routes = [
     { path: '/', element: <Home /> },
