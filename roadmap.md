@@ -2,8 +2,6 @@
 
 ## 1. Configuration initiale ✅
 - [x] Initialiser Strapi backend
-  - Utiliser SQLite en développement
-  - Vérifier l'accès à l'admin panel
 - [x] Configurer l'environnement de développement
 - [x] Créer le projet React frontend avec Vite
 - [x] Installer les dépendances essentielles
@@ -12,7 +10,7 @@
   - axios
   - styled-components
 
-## 2. Backend (Strapi) Setup
+## 2. Backend (Strapi) Setup ✅
 - [x] Configurer les collections de base:
   - Tweet: 
     ```
@@ -49,13 +47,13 @@
     { path: '/login', element: <Login /> }
   ]
   ```
-- [ ] Jotai Store Setup
+- [x] Jotai Store Setup
   ```jsx
   authAtom
   tweetsAtom
   ```
 
-## 4. Features Core (MVP)
+## 4. Features Core (MVP) ⬅️ NOUS SOMMES ICI
 ### 4.1 Tweets
 - [ ] Affichage des tweets
   - Liste des tweets
