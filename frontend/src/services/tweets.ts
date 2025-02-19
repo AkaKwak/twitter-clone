@@ -19,20 +19,25 @@ export const tweetService = {
    * @returns Promise contenant la liste des tweets
    */
   getAll: async () => {
-    const response = await api.get('/tweets');
-    console.log('Response from API:', response.data);
+    const response = await api.get('/tweets?populate=*');
     
-    if (!response.data?.data) {
-      console.error('Invalid response format:', response.data);
-      return [];
-    }
+    const sampleTweet = response.data.data[0];
+    console.log('=== TWEET AVEC RELATIONS ===');
+    console.log(JSON.stringify(sampleTweet, null, 2));
+    console.log('=== RELATIONS ===');
+    console.log('Author:', sampleTweet.author);
+    console.log('=========================');
 
-    return response.data.data.map((tweet: any) => ({
-      id: tweet.id,
-      content: tweet.content,
-      timestamp: tweet.createdAt,
-      author: tweet.author?.username || 'Anonyme'
-    }));
+    return response.data.data.map((tweet: any) => {
+      // Récupérer l'auteur depuis la relation
+      const authorData = tweet.author;
+      return {
+        id: tweet.id,
+        content: tweet.content,
+        timestamp: tweet.createdAt,
+        author: authorData ? authorData.username : 'Anonyme'
+      };
+    });
   },
 
   getById: async (id: number) => {
@@ -51,17 +56,21 @@ export const tweetService = {
    * @returns Promise contenant le tweet créé
    */
   create: async (content: string) => {
+    // Récupérer l'ID de l'utilisateur connecté
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+
     const response = await api.post('/tweets', {
       data: {
         content,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        author: user.id  // Associer l'auteur au tweet
       }
     });
     return {
       id: response.data.data.id,
       content: response.data.data.content,
       timestamp: response.data.data.createdAt,
-      author: response.data.data.author?.username || 'Anonyme'
+      author: response.data.data.author || 'Anonyme'
     };
   },
 

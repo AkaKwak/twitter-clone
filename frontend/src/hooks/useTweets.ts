@@ -46,25 +46,11 @@ export function useTweets() {
     }
   };
 
-  const deleteTweet = async (id: number) => {
-    try {
-      await tweetService.delete(id);
-      setTweetsState(state => ({
-        ...state,
-        items: state.items.filter(tweet => tweet.id !== id)
-      }));
-    } catch (error) {
-      console.error('Error deleting tweet:', error);
-      throw error;
-    }
-  };
-
   return {
     tweets: tweetsState.items,
     loading: tweetsState.loading,
     error: tweetsState.error,
     fetchTweets,
-    createTweet,
-    deleteTweet
+    createTweet
   };
 } 
