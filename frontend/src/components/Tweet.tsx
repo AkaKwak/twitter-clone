@@ -12,9 +12,10 @@ interface TweetProps {
   id: number;
   content: string;
   timestamp: string;
+  author: string;
 }
 
-export function Tweet({ id, content, timestamp }: TweetProps) {
+export function Tweet({ id, content, timestamp, author }: TweetProps) {
   const { deleteTweet } = useTweets();
   const [isDeleting, setIsDeleting] = useState(false);
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
@@ -38,10 +39,13 @@ export function Tweet({ id, content, timestamp }: TweetProps) {
 
   return (
     <Link to={`/tweet/${id}`} className={styles.tweet}>
+      <div className={styles.header}>
+        <span className={styles.author}>{author}</span>
+        <span className={styles.timestamp}>
+          {new Date(timestamp).toLocaleString()}
+        </span>
+      </div>
       <p className={styles.content}>{content}</p>
-      <span className={styles.timestamp}>
-        {new Date(timestamp).toLocaleString()}
-      </span>
       <button 
         onClick={handleDelete}
         className={styles.deleteButton}

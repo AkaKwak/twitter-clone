@@ -10,6 +10,7 @@ export interface Tweet {
   id: number;
   content: string;
   timestamp: string;
+  author: string;
 }
 
 export const tweetService = {
@@ -29,7 +30,8 @@ export const tweetService = {
     return response.data.data.map((tweet: any) => ({
       id: tweet.id,
       content: tweet.content,
-      timestamp: tweet.createdAt
+      timestamp: tweet.createdAt,
+      author: tweet.author?.username || 'Anonyme'
     }));
   },
 
@@ -58,7 +60,8 @@ export const tweetService = {
     return {
       id: response.data.data.id,
       content: response.data.data.content,
-      timestamp: response.data.data.createdAt
+      timestamp: response.data.data.createdAt,
+      author: response.data.data.author?.username || 'Anonyme'
     };
   },
 
