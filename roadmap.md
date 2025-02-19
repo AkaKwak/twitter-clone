@@ -55,22 +55,27 @@
 
 ## 4. Features Core (MVP) ⬅️ NOUS SOMMES ICI
 ### 4.1 Tweets
-- [ ] Affichage des tweets
-  - Liste des tweets
-  - Composant Tweet individuel
-- [ ] Création de tweets
-  - Formulaire de création
-  - Validation
-  - Feedback utilisateur
+- [x] Affichage des tweets
+  - [x] Liste des tweets
+  - [x] Composant Tweet individuel
+- [x] Création de tweets
+  - [x] Formulaire de création
+  - [x] Validation
+  - [x] Feedback utilisateur
 
-### 4.2 Authentication
+### 4.2 Authentication ⬅️ PROCHAINE ÉTAPE PRIORITAIRE
 - [ ] Login/Register
-  - Formulaires
-  - Gestion du token JWT
-  - Redirection
+  - [ ] Formulaires
+  - [ ] Gestion du token JWT
+  - [ ] Redirection
 - [ ] Protected Routes
-  - HOC ou composant wrapper
-  - Redirection si non authentifié
+  - [ ] HOC ou composant wrapper
+  - [ ] Redirection si non authentifié
+
+### 4.3 Fonctionnalités CRUD essentielles à ajouter
+- [ ] Supprimer un tweet
+- [ ] Modifier un tweet
+- [ ] Pagination des tweets
 
 ## 5. Features Additionnelles (Phase 2)
 ### 5.1 Relations et Interactions

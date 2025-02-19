@@ -1,0 +1,16 @@
+.list {
+  background-color: #fff;
+}
+
+.loading {
+  padding: 2rem;
+  text-align: center;
+  color: #536471;
+}
+
+.error {
+  padding: 2rem;
+  text-align: center;
+  color: #e0245e;
+  background-color: #ffebee;
+} 

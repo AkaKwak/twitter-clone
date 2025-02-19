@@ -2,30 +2,53 @@
  * Hook personnalisé pour gérer les tweets avec Jotai
  */
 import { useAtom } from 'jotai';
-import { tweetsAtom, loadingAtom } from '../store/atoms';
+import { tweetsAtom } from '../store/atoms';
 import { tweetService } from '../services/tweets';
 
 export function useTweets() {
-  const [tweets, setTweets] = useAtom(tweetsAtom);
-  const [loading, setLoading] = useAtom(loadingAtom);
+  const [tweetsState, setTweetsState] = useAtom(tweetsAtom);
 
   const fetchTweets = async () => {
-    console.log('Fetching tweets...');
-    setLoading(true);
+    setTweetsState(state => ({ ...state, loading: true, error: null }));
     try {
       const response = await tweetService.getAll();
-      console.log('API Response:', response);
-      setTweets(response.data);
+      setTweetsState({
+        items: response.data,
+        loading: false,
+        error: null
+      });
     } catch (error) {
-      console.error('Failed to fetch tweets:', error);
-    } finally {
-      setLoading(false);
+      setTweetsState(state => ({
+        ...state,
+        loading: false,
+        error: 'Failed to fetch tweets'
+      }));
+    }
+  };
+
+  const createTweet = async (content: string) => {
+    setTweetsState(state => ({ ...state, loading: true, error: null }));
+    try {
+      const response = await tweetService.create(content);
+      setTweetsState(state => ({
+        items: [response.data, ...state.items],
+        loading: false,
+        error: null
+      }));
+    } catch (error) {
+      setTweetsState(state => ({
+        ...state,
+        loading: false,
+        error: 'Failed to create tweet'
+      }));
     }
   };
 
   return {
-    tweets,
-    loading,
-    fetchTweets
+    tweets: tweetsState.items,
+    loading: tweetsState.loading,
+    error: tweetsState.error,
+    fetchTweets,
+    createTweet
   };
 } 

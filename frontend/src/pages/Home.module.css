@@ -16,8 +16,18 @@
   z-index: 100;
 }
 
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.titleLink:hover .title {
+  color: #1da1f2;
+}
+
 .title {
   font-size: 1.25rem;
   font-weight: 700;
   color: #0f1419;
+  transition: color 0.2s;
 } 
