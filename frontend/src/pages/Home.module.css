@@ -14,6 +14,9 @@
   padding: 1rem;
   border-bottom: 1px solid #e1e8ed;
   z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .titleLink {
@@ -30,4 +33,44 @@
   font-weight: 700;
   color: #0f1419;
   transition: color 0.2s;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.username {
+  font-weight: 500;
+  color: #536471;
+}
+
+.logoutButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  background-color: #e8f5fd;
+  color: #1da1f2;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logoutButton:hover {
+  background-color: #d8e9f7;
+}
+
+.loginButton {
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  background-color: #1da1f2;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.loginButton:hover {
+  background-color: #1a91da;
 } 

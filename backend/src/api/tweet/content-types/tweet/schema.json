@@ -27,9 +27,8 @@
     },
     "author": {
       "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "tweets"
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
     }
   }
 }

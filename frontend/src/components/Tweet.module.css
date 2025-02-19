@@ -1,23 +1,58 @@
 .tweet {
+  display: block;
+  text-decoration: none;
+  color: inherit;
   padding: 1rem;
-  border-bottom: 1px solid #e1e8ed;
+  border-bottom: 1px solid #eee;
   cursor: pointer;
   transition: background-color 0.2s;
+  position: relative;
 }
 
 .tweet:hover {
   background-color: rgba(0, 0, 0, 0.03);
+  text-decoration: none;
 }
 
 .content {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin-bottom: 0.75rem;
-  color: #0f1419;
+  margin: 0;
+  font-size: 1rem;
 }
 
 .timestamp {
-  color: #536471;
-  font-size: 0.85rem;
-  display: block;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.deleteButton:hover {
+  background-color: rgba(244, 33, 46, 0.1);
+}
+
+.tweet:hover .deleteButton {
+  opacity: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.author {
+  font-weight: bold;
+  color: #333;
 } 

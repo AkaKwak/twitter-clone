@@ -3,6 +3,7 @@
  */
 import { atom } from 'jotai';
 import { Tweet } from '../services/tweets';
+import api from '../services/api';
 
 // Interface pour l'état global des tweets
 interface TweetsState {
@@ -43,4 +44,18 @@ const initialAuthState: AuthState = {
 export const authAtom = atom(initialAuthState);
 
 // Atom dérivé pour le chargement des tweets
-export const loadingAtom = atom<boolean>(false); 
+export const loadingAtom = atom<boolean>(false);
+
+// Service pour les opérations CRUD
+export const tweetService = {
+  // ... existant ...
+  delete: async (id: number) => {
+    return api.delete(`/tweets/${id}`);
+  },
+  update: async (id: number, content: string) => {
+    return api.put(`/tweets/${id}`, { data: { content } });
+  },
+  getById: async (id: number) => {
+    return api.get(`/tweets/${id}`);
+  }
+}; 

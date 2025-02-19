@@ -82,12 +82,6 @@
       "relation": "oneToMany",
       "target": "api::follow.follow",
       "mappedBy": "following"
-    },
-    "tweets": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::tweet.tweet",
-      "mappedBy": "author"
     }
   }
 }

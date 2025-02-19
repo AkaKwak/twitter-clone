@@ -2,20 +2,60 @@
  * Composant Tweet
  * Affiche un tweet individuel avec son contenu et sa date
  */
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useTweets } from '../hooks/useTweets';
+import { Toast } from './Toast';
 import styles from './Tweet.module.css';
 
 interface TweetProps {
+  id: number;
   content: string;
   timestamp: string;
 }
 
-export function Tweet({ content, timestamp }: TweetProps) {
+export function Tweet({ id, content, timestamp }: TweetProps) {
+  const { deleteTweet } = useTweets();
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!window.confirm('Voulez-vous vraiment supprimer ce tweet ?')) {
+      return;
+    }
+
+    setIsDeleting(true);
+    try {
+      await deleteTweet(id);
+      setToast({ message: 'Tweet supprimé avec succès', type: 'success' });
+    } catch (error) {
+      setToast({ message: 'Erreur lors de la suppression', type: 'error' });
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
-    <div className={styles.tweet}>
+    <Link to={`/tweet/${id}`} className={styles.tweet}>
       <p className={styles.content}>{content}</p>
-      <small className={styles.timestamp}>
+      <span className={styles.timestamp}>
         {new Date(timestamp).toLocaleString()}
-      </small>
-    </div>
+      </span>
+      <button 
+        onClick={handleDelete}
+        className={styles.deleteButton}
+        disabled={isDeleting}
+      >
+        {isDeleting ? '...' : '🗑️'}
+      </button>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+    </Link>
   );
 } 

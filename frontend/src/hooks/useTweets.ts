@@ -9,15 +9,17 @@ export function useTweets() {
   const [tweetsState, setTweetsState] = useAtom(tweetsAtom);
 
   const fetchTweets = async () => {
+    console.log('Fetching tweets...');
     setTweetsState(state => ({ ...state, loading: true, error: null }));
     try {
-      const response = await tweetService.getAll();
+      const tweets = await tweetService.getAll();
       setTweetsState({
-        items: response.data,
+        items: tweets,
         loading: false,
         error: null
       });
     } catch (error) {
+      console.error('Failed to fetch tweets:', error);
       setTweetsState(state => ({
         ...state,
         loading: false,
@@ -44,11 +46,25 @@ export function useTweets() {
     }
   };
 
+  const deleteTweet = async (id: number) => {
+    try {
+      await tweetService.delete(id);
+      setTweetsState(state => ({
+        ...state,
+        items: state.items.filter(tweet => tweet.id !== id)
+      }));
+    } catch (error) {
+      console.error('Error deleting tweet:', error);
+      throw error;
+    }
+  };
+
   return {
     tweets: tweetsState.items,
     loading: tweetsState.loading,
     error: tweetsState.error,
     fetchTweets,
-    createTweet
+    createTweet,
+    deleteTweet
   };
 } 

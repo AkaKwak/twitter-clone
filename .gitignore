@@ -192,3 +192,5 @@ frontend/.vite
 # Database
 *.sqlite
 *.sqlite3
+
+.cursorrules

@@ -1,6 +1,5 @@
 /**
  * Service de gestion des tweets
- * Contient toutes les interactions avec l'API concernant les tweets
  */
 import api from './api';
 
@@ -11,8 +10,6 @@ export interface Tweet {
   id: number;
   content: string;
   timestamp: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export const tweetService = {
@@ -22,7 +19,28 @@ export const tweetService = {
    */
   getAll: async () => {
     const response = await api.get('/tweets');
-    return response.data;
+    console.log('Response from API:', response.data);
+    
+    if (!response.data?.data) {
+      console.error('Invalid response format:', response.data);
+      return [];
+    }
+
+    return response.data.data.map((tweet: any) => ({
+      id: tweet.id,
+      content: tweet.content,
+      timestamp: tweet.createdAt
+    }));
+  },
+
+  getById: async (id: number) => {
+    const response = await api.get(`/tweets/${id}`);
+    // Transformer un seul tweet
+    return {
+      id: response.data.data.id,
+      content: response.data.data.attributes.content,
+      timestamp: response.data.data.attributes.createdAt
+    };
   },
 
   /**
@@ -34,9 +52,29 @@ export const tweetService = {
     const response = await api.post('/tweets', {
       data: {
         content,
-        timestamp: new Date().toISOString(),
-      },
+        timestamp: new Date().toISOString()
+      }
     });
-    return response.data;
+    return {
+      id: response.data.data.id,
+      content: response.data.data.content,
+      timestamp: response.data.data.createdAt
+    };
   },
-}; 
+
+  update: async (id: number, content: string) => {
+    const response = await api.put(`/tweets/${id}`, {
+      data: { content }
+    });
+    // Transformer le tweet mis à jour
+    return {
+      id: response.data.data.id,
+      content: response.data.data.attributes.content,
+      timestamp: response.data.data.attributes.createdAt
+    };
+  },
+
+  delete: async (id: number) => {
+    return api.delete(`/tweets/${id}`);
+  }
+};

@@ -4,11 +4,30 @@
  */
 import { createBrowserRouter } from 'react-router-dom';
 import Home from '../pages/Home';
+import Login from '../pages/Login';
+import { ProtectedRoute } from '../components/ProtectedRoute';
+import TweetDetail from '../pages/TweetDetail';
 
 // Définition des routes avec React Router
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: (
+      <ProtectedRoute allowPublic>
+        <Home />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/tweet/:id',
+    element: (
+      <ProtectedRoute allowPublic>
+        <TweetDetail />
+      </ProtectedRoute>
+    ),
   },
 ]); 
